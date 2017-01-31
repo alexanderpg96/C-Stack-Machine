@@ -6,7 +6,7 @@ int main()
 
 	char str[65];
 	char * pch;
-	printf("Assingment #1-1, Alexander Pearson-Goulart, pearsongoulart@gmail.com\n");
+	printf("Assignment #1-1, Alexander Pearson-Goulart, pearsongoulart@gmail.com\n");
 	fgets(str, 65, stdin);
 
 	char *pos;
