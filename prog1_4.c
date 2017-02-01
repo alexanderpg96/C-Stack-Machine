@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 int isInt(char *s);
 void checkLen(char string[]);
@@ -12,6 +13,7 @@ int main()
     char finalOut[2][5];
 	char * pch;
     int count = 0;
+    int quit = 0;
 	printf("Assignment #1-2, Alexander Pearson-Goulart, pearsongoulart@gmail.com\n");
     printf("> ");
 	fgets(str, 20, stdin);
@@ -20,31 +22,57 @@ int main()
 
 	pch = strtok(str, " \n\r");
 
-	while(pch != NULL)
+    if(strcasecmp(pch, "quit") == 0)
+            quit = 1; 
+
+    while(quit != 1)
     {
-        count++;
-        if (count > 2) 
+	    while(pch != NULL)
         {
-            printf("ERROR! Incorrect number of tokens found.\n> ");
-            fgets(str, 20, stdin);
-            pch = strtok(str, " \n\r");
-            count = 0;
-        }
-        else
-        {
-            if(isInt(pch))
+            count++;
+            if (count > 2) 
             {
-                strcpy(finalOut[count-1], "INT ");
+                printf("ERROR! Incorrect number of tokens found.\n> ");
+                fgets(str, 20, stdin);
+                pch = strtok(str, " \n\r");
+                count = 0;
+
+                if(strcasecmp(pch, "quit") == 0)
+                {
+                    quit = 1; 
+                    break;
+                }
             }
             else
             {
-                strcpy(finalOut[count-1], "STR ");
+                if(isInt(pch))
+                {
+                    strcpy(finalOut[count-1], "INT ");
+                }
+                else
+                {
+                    strcpy(finalOut[count-1], "STR ");
+                }
+		        pch = strtok(NULL, " \n\r");
             }
-		    pch = strtok(NULL, " \n\r");
-        }
-	}
+	    }
 
-    printf("%s%s\n", finalOut[0], finalOut[1]);
+        if(quit == 1) break;
+
+        count = 0;
+
+        printf("%s%s\n", finalOut[0], finalOut[1]);
+        memset(&finalOut[0], 0, sizeof(finalOut));
+        memset(&finalOut[1], 0, sizeof(finalOut));
+
+        printf("> ");
+        fgets(str, 20, stdin);
+        checkLen(str);
+	    pch = strtok(str, " \n\r");
+
+        if(strcasecmp(pch, "quit") == 0)
+            quit = 1;       
+    }
 
 }
 
@@ -61,9 +89,16 @@ int isInt(char *s)
 
 void checkLen(char *string)
 {
-    while(strlen(string) > 21) 
+    while(string[strlen(string)-1] != '\n') 
     {
-        printf("ERROR! Input string too long.");
-        fgets(string, 20, stdin);
+        int dropped = 0;
+        while(fgetc(stdin) != '\n')
+            dropped++;
+
+        if(dropped > 0)
+        {
+            printf("ERROR! Input string too long.\n> ");
+            fgets(string, 20, stdin);
+        }
     }
 }
