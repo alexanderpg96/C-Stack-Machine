@@ -45,7 +45,7 @@ int main()
             }
 		    pch = strtok(NULL, " \n\r");
             count++;
-            if(pch == NULL && count == 2)
+            if(pch == NULL && (count == 2 || count == 1))
                 break;
         }
 	}
