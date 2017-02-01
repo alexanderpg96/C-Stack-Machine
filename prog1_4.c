@@ -14,7 +14,7 @@ int main()
 	char * pch;
     int count = 0;
     int quit = 0;
-	printf("Assignment #1-2, Alexander Pearson-Goulart, pearsongoulart@gmail.com\n");
+	printf("Assignment #1-4, Alexander Pearson-Goulart, pearsongoulart@gmail.com\n");
     printf("> ");
 	fgets(str, 20, stdin);
 
