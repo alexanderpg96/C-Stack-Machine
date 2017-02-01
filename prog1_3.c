@@ -11,16 +11,22 @@ int main()
     char finalOut[2][5];
 	char * pch;
     int count = 0;
-	printf("Assignment #1-2, Alexander Pearson-Goulart, pearsongoulart@gmail.com\n");
+	printf("Assignment #1-3, Alexander Pearson-Goulart, pearsongoulart@gmail.com\n");
     printf("> ");
 	fgets(str, 65, stdin);
 
 	pch = strtok(str, " \n\r");
 
-	while(pch != NULL)
+	while(count < 4)
     {
-        count++;
         if (count > 2) 
+        {
+            printf("ERROR! Incorrect number of tokens found.\n> ");
+            fgets(str, 65, stdin);
+            pch = strtok(str, " \n\r");
+            count = 0;
+        }
+        else if(pch == NULL && count == 0)
         {
             printf("ERROR! Incorrect number of tokens found.\n> ");
             fgets(str, 65, stdin);
@@ -31,13 +37,16 @@ int main()
         {
             if(isInt(pch))
             {
-                strcpy(finalOut[count-1], "INT ");
+                strcpy(finalOut[count], "INT ");
             }
             else
             {
-                strcpy(finalOut[count-1], "STR ");
+                strcpy(finalOut[count], "STR ");
             }
 		    pch = strtok(NULL, " \n\r");
+            count++;
+            if(pch == NULL && count == 2)
+                break;
         }
 	}
 
@@ -55,3 +64,4 @@ int isInt(char *s)
 
     return 1;
 }
+
