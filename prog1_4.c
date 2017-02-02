@@ -6,38 +6,53 @@
 int isInt(char *s);
 void checkLen(char string[]);
 
+int con = 22;
+
 int main()
 {
-
-	char str[20];
+	char str[con];
     char finalOut[2][5];
 	char * pch;
     int count = 0;
     int quit = 0;
 	printf("Assignment #1-4, Alexander Pearson-Goulart, pearsongoulart@gmail.com\n");
     printf("> ");
-	fgets(str, 20, stdin);
-
+	fgets(str, con-1, stdin);
+    
     checkLen(str);
 
 	pch = strtok(str, " \n\r");
 
-    if(strcasecmp(pch, "quit") == 0)
+    if(pch != NULL && strcasecmp(pch, "quit") == 0)
             quit = 1; 
 
     while(quit != 1)
     {
-	    while(pch != NULL)
+	    while(count < 4)
         {
-            count++;
             if (count > 2) 
             {
                 printf("ERROR! Incorrect number of tokens found.\n> ");
-                fgets(str, 20, stdin);
+                fgets(str, con-1, stdin);
+                checkLen(str);
                 pch = strtok(str, " \n\r");
                 count = 0;
 
-                if(strcasecmp(pch, "quit") == 0)
+                if(pch != NULL && strcasecmp(pch, "quit") == 0)
+                {
+                    quit = 1; 
+                    break;
+                }
+            }
+            else if(pch == NULL && count == 0)
+            {
+                printf("ERROR! Incorrect number of tokens found.\n> ");
+                fgets(str, con-1, stdin);
+                checkLen(str);
+                pch = strtok(str, " \n\r");
+                count = 0;
+
+                if(pch != NULL && strcasecmp(pch, "quit") == 0)
                 {
                     quit = 1; 
                     break;
@@ -47,13 +62,16 @@ int main()
             {
                 if(isInt(pch))
                 {
-                    strcpy(finalOut[count-1], "INT ");
+                    strcpy(finalOut[count], "INT ");
                 }
                 else
                 {
-                    strcpy(finalOut[count-1], "STR ");
+                    strcpy(finalOut[count], "STR ");
                 }
 		        pch = strtok(NULL, " \n\r");
+                count++;
+                if(pch == NULL && (count == 2 || count == 1))
+                    break;
             }
 	    }
 
@@ -66,11 +84,11 @@ int main()
         memset(&finalOut[1], 0, sizeof(finalOut));
 
         printf("> ");
-        fgets(str, 20, stdin);
+        fgets(str, con-1, stdin);
         checkLen(str);
 	    pch = strtok(str, " \n\r");
 
-        if(strcasecmp(pch, "quit") == 0)
+        if(pch != NULL && strcasecmp(pch, "quit") == 0)
             quit = 1;       
     }
 
@@ -98,7 +116,7 @@ void checkLen(char *string)
         if(dropped > 0)
         {
             printf("ERROR! Input string too long.\n> ");
-            fgets(string, 20, stdin);
+            fgets(string, con, stdin);
         }
     }
 }
