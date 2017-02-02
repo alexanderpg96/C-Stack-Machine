@@ -79,15 +79,15 @@ int main()
 
         if((strcasecmp(finalOut[0], "INT ") == 0) && count == 2)
         {
-            printf("ERROR! Expected STR INT\n");
+            printf("ERROR! Expected STR INT.\n");
         }
         else if ((strcasecmp(finalOut[0], "INT ") == 0) && count == 1)
         {
-            printf("ERROR! Expected STR\n");
+            printf("ERROR! Expected STR.\n");
         }
         else if ((strcasecmp(finalOut[1], "STR ") == 0))
         {
-            printf("ERROR! Expected STR INT\n");
+            printf("ERROR! Expected STR INT.\n");
         }
         else
         {
