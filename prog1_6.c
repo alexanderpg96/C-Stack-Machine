@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 
     while(quit != 1)
     {
-        if(argCount > userIns-2)
+        if(argCount > userIns-1)
             exit(0);
 	    while(count < 4)
         {
