@@ -15,16 +15,13 @@ int main()
 	char * pch;
     int count = 0;
     int quit = 0;
-	printf("Assignment #1-4, Alexander Pearson-Goulart, pearsongoulart@gmail.com\n");
+	printf("Assignment #1-5, Alexander Pearson-Goulart, pearsongoulart@gmail.com\n");
     printf("> ");
 	fgets(str, con-1, stdin);
     
     checkLen(str);
 
 	pch = strtok(str, " \n\r");
-
-    if(pch != NULL && strcasecmp(pch, "quit") == 0)
-            quit = 1; 
 
     while(quit != 1)
     {
@@ -37,12 +34,6 @@ int main()
                 checkLen(str);
                 pch = strtok(str, " \n\r");
                 count = 0;
-
-                if(pch != NULL && strcasecmp(pch, "quit") == 0)
-                {
-                    quit = 1; 
-                    break;
-                }
             }
             else if(pch == NULL && count == 0)
             {
@@ -51,15 +42,9 @@ int main()
                 checkLen(str);
                 pch = strtok(str, " \n\r");
                 count = 0;
-
-                if(pch != NULL && strcasecmp(pch, "quit") == 0)
-                {
-                    quit = 1; 
-                    break;
-                }
             }
-            else
-            {
+            //else
+            //{
                 if(isInt(pch))
                 {
                     strcpy(finalOut[count], "INT ");
@@ -68,12 +53,27 @@ int main()
                 {
                     strcpy(finalOut[count], "STR ");
                 }
+                if((strcasecmp(pch, "quit") == 0))
+                        quit = 1;
 		        pch = strtok(NULL, " \n\r");
                 count++;
                 if(pch == NULL && (count == 2 || count == 1))
+                {
+                    if(count == 1 && quit == 1)
+                        quit = 1;
+                    else
+                        quit = 0;
+
                     break;
-            }
+                }
+            //}
 	    }
+
+        if(pch != NULL && strcasecmp(finalOut[0], "quit") == 0 && count == 1)
+        {
+                quit = 1; 
+                break;
+        }
 
         if(quit == 1) break;
 
@@ -104,8 +104,8 @@ int main()
         checkLen(str);
 	    pch = strtok(str, " \n\r");
 
-        if(pch != NULL && strcasecmp(pch, "quit") == 0)
-            quit = 1;       
+        if(pch != NULL && strcasecmp(pch, "quit") == 0 && strlen(pch+1) == 0)
+            quit = 1;     
     }
 
 }
