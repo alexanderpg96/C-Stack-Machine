@@ -42,13 +42,14 @@ int main(int argc, char **argv)
 
     while(quit != 1)
     {
-        if(argCount > userIns)
-            exit(0);
 	    while(count < 4)
         {
             if (count > 2) 
             {
                 printf("ERROR! Incorrect number of tokens found.\n> ");
+                argCount++;
+                if(argCount > userIns-1)
+                    exit(0);
                 fgets(str, con-1, stdin);
                 checkLen(str);
                 pch = strtok(str, " \n\r");
@@ -57,6 +58,9 @@ int main(int argc, char **argv)
             else if(pch == NULL && count == 0)
             {
                 printf("ERROR! Incorrect number of tokens found.\n> ");
+                argCount++;
+                if(argCount > userIns-1)
+                    exit(0);
                 fgets(str, con-1, stdin);
                 checkLen(str);
                 pch = strtok(str, " \n\r");
@@ -86,8 +90,6 @@ int main(int argc, char **argv)
                     break;
                 }
             //}
-
-            argCount++;
 	    }
 
         if(pch != NULL && strcasecmp(finalOut[0], "quit") == 0 && count == 1)
@@ -101,18 +103,30 @@ int main(int argc, char **argv)
         if((strcasecmp(finalOut[0], "INT ") == 0) && count == 2)
         {
             printf("ERROR! Expected STR INT.\n");
+            argCount++;
+            if(argCount > userIns-1)
+                exit(0);
         }
         else if ((strcasecmp(finalOut[0], "INT ") == 0) && count == 1)
         {
             printf("ERROR! Expected STR.\n");
+            argCount++;
+            if(argCount > userIns-1)
+                exit(0);
         }
         else if ((strcasecmp(finalOut[1], "STR ") == 0))
         {
             printf("ERROR! Expected STR INT.\n");
+            argCount++;
+            if(argCount > userIns-1)
+                exit(0);
         }
         else
         {
             printf("%s%s\n", finalOut[0], finalOut[1]);
+            argCount++;
+            if(argCount > userIns-1)
+                exit(0);
         }
 
         count = 0;
