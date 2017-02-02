@@ -76,7 +76,6 @@ int main(int argc, char **argv)
                         quit = 1;
 		        pch = strtok(NULL, " \n\r");
                 count++;
-                argCount++;
                 if(pch == NULL && (count == 2 || count == 1))
                 {
                     if(count == 1 && quit == 1)
@@ -87,6 +86,8 @@ int main(int argc, char **argv)
                     break;
                 }
             //}
+
+            argCount++;
 	    }
 
         if(pch != NULL && strcasecmp(finalOut[0], "quit") == 0 && count == 1)
