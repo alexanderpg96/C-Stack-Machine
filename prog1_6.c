@@ -53,7 +53,6 @@ int main(int argc, char **argv)
                 checkLen(str);
                 pch = strtok(str, " \n\r");
                 count = 0;
-                argCount++;
             }
             else if(pch == NULL && count == 0)
             {
