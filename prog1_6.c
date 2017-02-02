@@ -31,6 +31,8 @@ int main(int argc, char **argv)
     int userIns = atoi(argv[1]);
     int argCount = 0;
 
+    if(userIns == 0) exit(0);
+
     printf("> ");
 	fgets(str, con-1, stdin);
     
@@ -51,6 +53,7 @@ int main(int argc, char **argv)
                 checkLen(str);
                 pch = strtok(str, " \n\r");
                 count = 0;
+                argCount++;
             }
             else if(pch == NULL && count == 0)
             {
